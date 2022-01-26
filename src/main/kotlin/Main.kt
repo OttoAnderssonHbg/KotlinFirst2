@@ -1,7 +1,30 @@
 fun main(args: Array<String>) {
     println("Hello World!")
+val contactHandler: ContactHandler = ContactHandler()
+    val loop: Boolean = true
+    while(loop){
+       var pick = contactHandler.Menu(0)
+        when(pick){
+            1 -> {
+                contactHandler.AddContact()
+            }
+            2 -> {
+                contactHandler.RemoveContact()
+            }
+            3 -> {
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+            }
+            4 -> {
+
+            }
+            5 -> {
+
+            }
+            6 -> {
+
+            }
+        }
+    }
+
+
 }
