@@ -1,3 +1,4 @@
+import java.io.File
 class ContactHandler {
     var contactlist: MutableList<Contacts> = mutableListOf()
 
@@ -64,15 +65,49 @@ class ContactHandler {
             contactlist[id].email = readln()
         }
         }
+    }
+    fun PrintContacts(){
+        for(i in 0 until  contactlist.count()){
+            println("\n id:["+i+"] Firstname: "+ contactlist[i] + " Lastname: "+ contactlist[i].lastname )
+        }
+    }
 
-        fun PrintContacts(){
-            for(i in 0 until  contactlist.count()){
-                println("\n id:["+i+"] Firstname: "+ contactlist[i] + " Lastname: "+ contactlist[i].lastname )
+    fun SortAndShow(){
+        var tempcontactlist: MutableList<Contacts> = contactlist
+        tempcontactlist.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER){it.firstname})
+
+        for(i in 0 until tempcontactlist.count()){
+            println("\n id:["+i+"] Firstname: "+ tempcontactlist[i] + " Lastname: "+ tempcontactlist[i].lastname )
+        }
+
+    }
+
+    fun ReadAndCreateFile(){
+
+        val filename = "ListOfContacts.txt"
+        var fileObject = File(filename)
+        var fileExists = fileObject.exists()
+        if(fileExists){
+            print("$filename file does exist.")
+
+            val file = File("ListOfContacts.txt")
+            val bufferedReader = file.bufferedReader()
+            val text:List<String> = bufferedReader.readLines()
+
+            for(i in 0 until text.count()){
+                text[i].split(",").map { it.trim() }
+                contactlist.add(Contacts(text[i][0],text[i][1],text[i][3]!!.toInt(),text[i][4]))
             }
-        }
 
-        fun SortAndShow(){
-
+        } else {
+            print("$filename file does not exist.")
+            fileObject.createNewFile()
         }
+    }
+    fun SaveFile(){
+
+    }
+    fun SaveAndExit(){
+
     }
 }
