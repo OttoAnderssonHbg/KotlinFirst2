@@ -68,7 +68,7 @@ class ContactHandler {
     }
     fun PrintContacts(){
         for(i in 0 until  contactlist.count()){
-            println("\n id:["+i+"] Firstname: "+ contactlist[i] + " Lastname: "+ contactlist[i].lastname )
+            println("\n id:["+i+"] Firstname: "+ contactlist[i].firstname + " Lastname: "+ contactlist[i].lastname )
         }
     }
 
@@ -77,7 +77,7 @@ class ContactHandler {
         tempcontactlist.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER){it.firstname})
 
         for(i in 0 until tempcontactlist.count()){
-            println("\n id:["+i+"] Firstname: "+ tempcontactlist[i] + " Lastname: "+ tempcontactlist[i].lastname )
+            println("\n id:["+i+"] Firstname: "+ tempcontactlist[i].firstname + " Lastname: "+ tempcontactlist[i].lastname )
         }
 
     }
@@ -95,8 +95,8 @@ class ContactHandler {
             val text:List<String> = bufferedReader.readLines()
 
             for(i in 0 until text.count()){
-                text[i].split(",").map { it.trim() }
-                contactlist.add(Contacts(text[i][0],text[i][1],text[i][3]!!.toInt(),text[i][4]))
+               var result: MutableList<String> = (text[i].split(',').map { it.trim() }).toMutableList()
+                contactlist.add(Contacts(result[0],result[1],result[2]!!.toInt(),result[3]))
             }
 
         } else {
@@ -105,9 +105,13 @@ class ContactHandler {
         }
     }
     fun SaveFile(){
+        val filename="ListOfContacts.txt"
+        File(filename).writeText("")
+        for(i in 0 until contactlist.count()){
 
-    }
-    fun SaveAndExit(){
-
+            var content:String=contactlist[i].firstname+","+contactlist[i].lastname+","+contactlist[i].phonenumber+","+contactlist[i].email
+            File(filename).appendText(content)
+            File(filename).appendText("\n")
+        }
     }
 }
