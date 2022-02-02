@@ -9,6 +9,7 @@ class ContactHandler {
         var pick = readln()!!.toInt()
         return pick
     }
+    //Menu method that gives the user options and returns the selected option.
     fun AddContact(){
         print("Enter Firstname: ")
         var firstname = readln()
@@ -22,7 +23,7 @@ class ContactHandler {
         contactlist.add(Contacts(firstname,lastname,phonenumber,email))
 
     }
-
+    // Method that lets the user add a contact by entering required paramaters.
     fun RemoveContact(){
 
         for(i in 0 until  contactlist.count()){
@@ -34,7 +35,7 @@ class ContactHandler {
         var id = readLine()!!.toInt()
         contactlist.removeAt(id)
     }
-
+    //Method that lets users remove contact by entering selected id of requested removal.
     fun EditContact(){
         for(i in 0 until  contactlist.count()){
             println("\nid:["+ i + "]"+" \n Firstname: " + contactlist[i].firstname + " \n Lastname: " + contactlist[i].lastname + " \n phonenumber: " + contactlist[i].phonenumber + " \n qemail: " + contactlist[i].email)
@@ -66,12 +67,13 @@ class ContactHandler {
         }
         }
     }
+    //Method that lets user edit a selected contact and selected paramater.
     fun PrintContacts(){
         for(i in 0 until  contactlist.count()){
             println("\n id:["+i+"] Firstname: "+ contactlist[i].firstname + " Lastname: "+ contactlist[i].lastname )
         }
     }
-
+    // Method that prints out contacts.
     fun SortAndShow(){
         var tempcontactlist: MutableList<Contacts> = contactlist
         tempcontactlist.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER){it.firstname})
@@ -81,37 +83,6 @@ class ContactHandler {
         }
 
     }
+    //Sorts contacts by first name and prints them out.
 
-    fun ReadAndCreateFile(){
-
-        val filename = "ListOfContacts.txt"
-        var fileObject = File(filename)
-        var fileExists = fileObject.exists()
-        if(fileExists){
-            print("$filename file does exist.")
-
-            val file = File("ListOfContacts.txt")
-            val bufferedReader = file.bufferedReader()
-            val text:List<String> = bufferedReader.readLines()
-
-            for(i in 0 until text.count()){
-               var result: MutableList<String> = (text[i].split(',').map { it.trim() }).toMutableList()
-                contactlist.add(Contacts(result[0],result[1],result[2]!!.toInt(),result[3]))
-            }
-
-        } else {
-            print("$filename file does not exist.")
-            fileObject.createNewFile()
-        }
-    }
-    fun SaveFile(){
-        val filename="ListOfContacts.txt"
-        File(filename).writeText("")
-        for(i in 0 until contactlist.count()){
-
-            var content:String=contactlist[i].firstname+","+contactlist[i].lastname+","+contactlist[i].phonenumber+","+contactlist[i].email
-            File(filename).appendText(content)
-            File(filename).appendText("\n")
-        }
-    }
 }

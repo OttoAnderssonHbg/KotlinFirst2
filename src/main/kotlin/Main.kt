@@ -1,10 +1,12 @@
 import java.io.File
-
+var contactHandler: ContactHandler = ContactHandler()
+val fileHandler: FileHandler = FileHandler()
+//creates contacthandler and filehandler
 fun main(args: Array<String>) {
     println("Hello World!")
-val contactHandler: ContactHandler = ContactHandler()
 
-    contactHandler.ReadAndCreateFile()
+     fileHandler.ReadAndCreateFile()
+    //Reads or creates file
     var loop: Boolean = true
 
     while(loop){
@@ -26,11 +28,11 @@ val contactHandler: ContactHandler = ContactHandler()
                 contactHandler.SortAndShow()
             }
             6 -> {
-                contactHandler.SaveFile()
+                fileHandler.SaveFile()
                 loop = false
             }
         }
     }
-
+   //Loop that executes method based on userinput.
 
 }
